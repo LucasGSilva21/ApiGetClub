@@ -1,0 +1,14 @@
+{
+  "name": "api_getclub",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/LucasGSilva21/ApiGetClub.git",
+  "author": "Lucasgsilva2102",
+  "license": "MIT",
+  "scripts": {
+    "start": "node src/server.js"
+  },
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
