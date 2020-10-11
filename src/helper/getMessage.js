@@ -1,4 +1,3 @@
-const { where } = require('../models/chat');
 const Chat = require('../models/chat');
 
 module.exports = async function get(sender, addressee){
