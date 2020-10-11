@@ -12,7 +12,7 @@ const server = require('http').createServer(app);
 const socket = require('socket.io')(server);
 
 socket.on('connection', async (socket) => {
-    console.log('user connected');
+    //console.log('user connected');
     //console.log(socket.handshake.query);
     let sender = socket.handshake.query.sender;
     let addressee = socket.handshake.query.addressee;
@@ -25,7 +25,7 @@ socket.on('connection', async (socket) => {
     socket.on('sendMessage', data => {
         //console.log(data);
         saveMessage(sender, addressee, data.message);
-        socket.broadcast.emit('receivedMessage', data);
+        socket.emit('receivedMessage', data);
     });
 });
 
