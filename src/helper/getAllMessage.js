@@ -12,7 +12,7 @@ module.exports = async function get(sender, addressee){
                 addressee:sender,
             }
         ]
-    });
+    }).populate('sender addressee');
 
     return messages;
 };

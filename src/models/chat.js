@@ -4,11 +4,11 @@ const chatSchema = new mongoose.Schema({
     message: {
         type: String
     },
-    sender: {
-        type: String
+    sender: { 
+        type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true
     },
-    addressee: {
-        type: String
+    addressee: { 
+        type: mongoose.Schema.Types.ObjectId, ref: 'User' 
     },
     createdAt: {
         type: Date,

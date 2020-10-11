@@ -2,7 +2,8 @@ const express = require('express');
 const routes = require('./routes/index');
 
 const saveMessage = require('./helper/saveMessage');
-const getMessage = require('./helper/getMessage');
+const getAllMessage = require('./helper/getAllMessage');
+const getOneMessage = require('./helper/getOneMessage');
 
 const app = express();
 app.use(express.json());
@@ -17,15 +18,19 @@ socket.on('connection', async (socket) => {
     let sender = socket.handshake.query.sender;
     let addressee = socket.handshake.query.addressee;
     
-    let messages = await getMessage(sender, addressee);
+    let messages = await getAllMessage(sender, addressee);
     //console.log(messages);
 
     socket.emit('previousMessages', messages);
 
-    socket.on('sendMessage', data => {
+    socket.on('sendMessage', async data => {
         //console.log(data);
-        saveMessage(sender, addressee, data.message);
-        socket.emit('receivedMessage', data);
+        let chat = await saveMessage(sender, addressee, data.message);
+        //console.log(chat);
+        let message = await getOneMessage(chat._id);
+        //console.log(message);
+
+        socket.emit('receivedMessage', message);
     });
 });
 
