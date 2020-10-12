@@ -1,4 +1,5 @@
 const User = require('../models/user');
+const Star = require('../models/star');
 
 module.exports = {
     getAll: async (req, res) => {
@@ -29,5 +30,18 @@ module.exports = {
         } catch (err) {
             return res.status(400).json({ error: err});
         }
+    },
+    getStar: async (req, res) => {
+        const stars = await Star.find({
+            enterprise: req.params.id
+        });
+
+        let total = 0;
+
+        stars.forEach(star => {
+            total = total + star.total;
+        });
+
+        return res.status(200).json({star: (total/stars.length)});
     },
 };
