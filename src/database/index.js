@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-mongoose.connect('mongodb://localhost:27018/getclub', { 
+mongoose.connect('mongodb+srv://atlas:atlas@cluster0.bja9a.gcp.mongodb.net/atlas?retryWrites=true&w=majority', { 
   useNewUrlParser: true,
   useUnifiedTopology: true,
   useCreateIndex: true
