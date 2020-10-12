@@ -7,5 +7,6 @@ const routes = new Router();
 
 routes.get('/', UserController.getAll);
 routes.post('/', UserValidate.store, UserController.store);
+routes.delete('/:id', UserController.delete);
 
 module.exports = routes;

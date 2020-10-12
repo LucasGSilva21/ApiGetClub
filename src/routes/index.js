@@ -7,7 +7,7 @@ const service = require('./service.route');
 
 const routes = new Router();
 
-routes.use('/users', user);
+routes.use('/user', user);
 routes.use('/auth', session);
 routes.use('/chat', chat);
 routes.use('/service', service);
