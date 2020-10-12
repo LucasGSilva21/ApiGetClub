@@ -17,6 +17,21 @@ const UserSchema = new mongoose.Schema({
         required: true,
         select: false,
     },
+    cpf: {
+        type: String,
+        required: false,
+    },
+    cnpj: {
+        type: String,
+        required: false,
+    },
+    fantasyName: {
+        type: String,
+        required: false,
+    },
+    service: {
+        type: mongoose.Schema.Types.ObjectId, ref: 'Service' 
+    },
     createdAt: {
         type: Date,
         default: Date.now,
