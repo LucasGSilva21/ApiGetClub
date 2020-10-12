@@ -6,8 +6,9 @@ const UserValidate = require('../middlewares/validates/user.validate');
 const routes = new Router();
 
 routes.get('/', UserController.getAll);
+routes.get('/:userId', UserController.getOne);
 routes.post('/', UserValidate.store, UserController.store);
-routes.delete('/:id', UserController.delete);
-routes.get('/:id/star', UserController.getStar);
+routes.delete('/:userId', UserController.delete);
+routes.get('/:userId/star', UserController.getStar);
 
 module.exports = routes;

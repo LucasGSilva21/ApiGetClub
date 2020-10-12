@@ -2,11 +2,20 @@ const User = require('../models/user');
 const Star = require('../models/star');
 
 module.exports = {
-    getAll: async (req, res) => {
+    getOne: async (req, res) => {
         try{
-            const user = await User.find();
+            const user = await User.findById(req.params.userId);
 
             return res.status(200).json(user);
+        } catch (err) {
+            return res.status(400).json({ error: err});
+        }
+    },
+    getAll: async (req, res) => {
+        try{
+            const users = await User.find();
+
+            return res.status(200).json(users);
         } catch (err) {
             return res.status(400).json({ error: err});
         }
@@ -24,7 +33,7 @@ module.exports = {
     },
     delete: async (req, res) => {
         try{
-            await User.findByIdAndDelete(req.params.id);
+            await User.findByIdAndDelete(req.params.userId);
 
             return res.status(200).send();
         } catch (err) {
@@ -32,16 +41,20 @@ module.exports = {
         }
     },
     getStar: async (req, res) => {
-        const stars = await Star.find({
-            enterprise: req.params.id
-        });
+        try{
+            const stars = await Star.find({
+                enterprise: req.params.userId
+            });
 
-        let total = 0;
+            let total = 0;
 
-        stars.forEach(star => {
-            total = total + star.total;
-        });
+            stars.forEach(star => {
+                total = total + star.total;
+            });
 
-        return res.status(200).json({star: (total/stars.length)});
+            return res.status(200).json({star: (total/stars.length)});
+        } catch (err) {
+            return res.status(400).json({ error: err});
+        }
     },
 };
